@@ -1,0 +1,35 @@
+{
+  "name": "numeri",
+  "version": "0.0.0",
+  "description": "Numerical methods for web",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mwlon/numeri"
+  },
+  "keywords": [
+    "math",
+    "numeric",
+    "matrix"
+  ],
+  "author": {
+    "name": "Martin Loncaric"
+  },
+  "readmeFilename": "README.md",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^5.15.3",
+    "mocha": "^6.1.4"
+  },
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/mwlon/numeri/issues"
+  },
+  "homepage": "https://github.com/mwlon/numeri",
+  "scripts": {
+    "test": "mocha $(find test -name \"*$f*.js\") --timeout 200"
+  }
+}
