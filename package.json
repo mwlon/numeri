@@ -26,6 +26,9 @@
   "engines": {
     "node": "*"
   },
+  "files": {
+    "lib/**/*"
+  },
   "bugs": {
     "url": "https://github.com/mwlon/numeri/issues"
   },

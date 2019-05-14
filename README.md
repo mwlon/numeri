@@ -50,7 +50,7 @@ matrix0.matMul(numeri.fromFlat([1, 2, 3, 4, 5, 6], [2, 3])) //matrix multiplicat
 
 The `.slice` and `.transpose` operators return *views* into the original tensors.
 This is also standard behavior in other major numerical libraries, like numpy and Tensorflow.
-A view shares the same data as the original tensor, but may have different shape and access the at different indices.
+A view shares the same data as the original tensor, but may have different shape and access the data at different indices.
 
 This makes slicing and transposition `O(1)` time with respect to the data size.
 It also saves memory by not copying the data into each tensor.
