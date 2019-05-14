@@ -58,7 +58,7 @@ describe('Tensor', () => {
 
   describe('#copy', () => {
     it('should return a new version of the data', () => {
-      const copied = notSimpleMat.copy()
+      const copied = notSimpleMat.copy();
 
       assert.deepEqual(
         copied,
