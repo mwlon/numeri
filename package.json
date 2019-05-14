@@ -1,6 +1,6 @@
 {
   "name": "numeri",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Numerical methods for web",
   "main": "./lib/index.js",
   "repository": {
@@ -10,7 +10,8 @@
   "keywords": [
     "math",
     "numeric",
-    "matrix"
+    "matrix",
+    "tensor"
   ],
   "author": {
     "name": "Martin Loncaric"

@@ -15,57 +15,6 @@ describe('Tensor', () => {
     offset: 1
   });
 
-  describe('#plus', () => {
-    it('should add numbers', () => {
-      const expected = createUtils.fromFlat(
-        [2, 4, 6, 8, 10, 12],
-        [2, 3]
-      );
-
-      assert.deepEqual(
-        simpleMat.plus(simpleMat),
-        expected
-      );
-
-      assert.deepEqual(
-        simpleMat.plus(notSimpleMat),
-        expected
-      );
-
-      assert.deepEqual(
-        notSimpleMat.plus(simpleMat),
-        expected
-      );
-    });
-  });
-
-  describe('#minus', () => {
-    it('should subtract numbers', () => {
-      assert.deepEqual(
-        createUtils.vector([1, 2]).minus(createUtils.vector([3, 4])),
-        createUtils.vector([-2, -2])
-      );
-    });
-  });
-
-  describe('#times', () => {
-    it('should multiply numbers', () => {
-      assert.deepEqual(
-        createUtils.vector([1, 2]).times(createUtils.vector([3, 4])),
-        createUtils.vector([3, 8])
-      );
-    });
-  });
-
-  describe('#div', () => {
-    it('should divide numbers', () => {
-      assert.deepEqual(
-        createUtils.vector([2, 6]).div(createUtils.vector([2, 3])),
-        createUtils.vector([1, 2])
-      );
-    });
-  });
-
   describe('#slice', () => {
     it('should support subsets and undefined (keep all)', () => {
       assert.deepEqual(
@@ -103,6 +52,98 @@ describe('Tensor', () => {
       assert.deepEqual(
         createUtils.zeros([3, 1, 2]).plus(mat3d.transpose([1, 2, 0])),
         createUtils.fromFlat([0, 3, 1, 4, 2, 5], [3, 1, 2])
+      );
+    });
+  });
+
+  describe('#copy', () => {
+    it('should return a new version of the data', () => {
+      const copied = notSimpleMat.copy()
+
+      assert.deepEqual(
+        copied,
+        simpleMat
+      );
+
+      copied.set([0, 0], 33);
+      assert.strictEqual(copied.get([0, 0]), 33);
+      assert.strictEqual(notSimpleMat.get([0, 0]), 1);
+    });
+  });
+
+  describe('#plus', () => {
+    it('should add numbers', () => {
+      const expected = createUtils.fromFlat(
+        [2, 4, 6, 8, 10, 12],
+        [2, 3]
+      );
+
+      assert.deepEqual(
+        simpleMat.plus(simpleMat),
+        expected
+      );
+
+      assert.deepEqual(
+        simpleMat.plus(notSimpleMat),
+        expected
+      );
+
+      assert.deepEqual(
+        notSimpleMat.plus(simpleMat),
+        expected
+      );
+    });
+
+    it('should work for scalars', () => {
+      assert.deepEqual(
+        createUtils.scalar(3).plus(createUtils.scalar(4)),
+        createUtils.scalar(7)
+      );
+    });
+  });
+
+  describe('#minus', () => {
+    it('should subtract numbers', () => {
+      assert.deepEqual(
+        createUtils.vector([1, 2]).minus(createUtils.vector([3, 4])),
+        createUtils.vector([-2, -2])
+      );
+    });
+  });
+
+  describe('#times', () => {
+    it('should multiply numbers', () => {
+      assert.deepEqual(
+        createUtils.vector([1, 2]).times(createUtils.vector([3, 4])),
+        createUtils.vector([3, 8])
+      );
+    });
+  });
+
+  describe('#div', () => {
+    it('should divide numbers', () => {
+      assert.deepEqual(
+        createUtils.vector([2, 6]).div(createUtils.vector([2, 3])),
+        createUtils.vector([1, 2])
+      );
+    });
+  });
+
+  describe('#matMul', () => {
+    it('should multiply matrices', () => {
+      const colVec = createUtils.fromFlat(
+        [0, 1, 2],
+        [3, 1]
+      );
+
+      const expected = createUtils.fromFlat(
+        [8, 17],
+        [2, 1]
+      );
+
+      assert.deepEqual(
+        notSimpleMat.matMul(colVec),
+        expected
       );
     });
   });
