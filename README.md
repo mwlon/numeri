@@ -31,15 +31,15 @@ tens4d0.transpose([0, 2, 3, 1]) //(a x b x c x d) -> (a x c x d x b)
 
 matrix0.reshape([2, 3]) //returns a new matrix [[3, 4, 5], [6, 7, 8]]
 ```
-Note that `.reshape` returns a view.
+Note that `.transpose` returns a view.
 
 # Simple operators
 
 ```
-matrix0.exp() //returns a new matrix with elementwise-exponentiation
+matrix0.exp() //returns a new matrix with elementwise exponentiation
 matrix0.map((x) => x * x)
 
-matrix0.plus(matrix1) //returns a new matrix by element-wise addition
+matrix0.plus(matrix1) //returns a new matrix by elementwise addition
 matrix0.minus(matrix1)
 matrix0.times(matrix1)
 matrix0.div(matrix1)

@@ -26,15 +26,16 @@
   "engines": {
     "node": "*"
   },
-  "files": {
+  "files": [
     "lib/**/*"
-  },
+  ],
   "bugs": {
     "url": "https://github.com/mwlon/numeri/issues"
   },
   "homepage": "https://github.com/mwlon/numeri",
   "scripts": {
     "test": "mocha $(find test -name \"*$f*.js\") --timeout 200",
-    "lint": "./node_modules/.bin/eslint {lib/**,test/**}"
+    "lint": "./node_modules/.bin/eslint {lib/**,test/**}",
+    "speed": "find speed_test/tests -type f | xargs -I{} node {}"
   }
 }
