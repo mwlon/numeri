@@ -148,4 +148,46 @@ describe('Tensor', () => {
       );
     });
   });
+
+  describe('#broadcasting', () => {
+    it('should work for binary and unary ops', () => {
+      const col = createUtils.vector([0, 1]);
+      const row = createUtils.vector([2, 3, 4]);
+
+      const sum = col.broadcastOn(1).plus(row.broadcastOn(0));
+      const expectedSum = createUtils.fromFlat(
+        [2, 3, 4, 3, 4, 5],
+        [2, 3]
+      );
+
+      assertTensorEqual(
+        sum,
+        expectedSum
+      );
+
+      const doubled = sum.map((x) => 2 * x);
+      const expectedDoubled = createUtils.fromFlat(
+        [4, 6, 8, 6, 8, 10],
+        [2, 3]
+      );
+
+      assertTensorEqual(
+        doubled,
+        expectedDoubled
+      );
+
+      const minused = doubled.minus(1);
+      const expectedMinused = createUtils.vector([3, 5, 7, 5, 7, 9]);
+
+      assertTensorEqual(
+        minused.reshape([6]),
+        expectedMinused
+      );
+
+      assertTensorEqual(
+        col.broadcastOn(1).map((x) => x * 2),
+        createUtils.fromFlat([0, 2], [2, undefined])
+      );
+    });
+  });
 });

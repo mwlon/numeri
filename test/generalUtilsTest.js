@@ -6,6 +6,7 @@ describe('generalUtils', () => {
     it('should multiply an array of numbers', () => {
       assert.strictEqual(generalUtils.prod([1, 2, 3]), 6);
       assert.strictEqual(generalUtils.prod([1, 2, 3, 3]), 18);
+      assert.strictEqual(generalUtils.prod([1, undefined, undefined, 3]), 3);
     });
   });
 });
