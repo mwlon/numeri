@@ -3,8 +3,8 @@
 ```
 const scalar0 = numeri.scalar(3);
 const vector0 = numeri.vector([3, 4]);
-const matrix0 = numeri.fromFlat([3, 4, 5, 6, 7, 8], [3, 2]); //(creates a 3x2 matrix whose first row is `(3 4 5)`)
-const matrix1 = numeri.fromNested([[3, 4, 5], [6, 7, 8]]); //(creates the same 3x2 matrix, but is a tiny bit slower than `fromFlat`)
+const matrix0 = numeri.fromFlat([3, 4, 5, 6, 7, 8], [3, 2]); //(creates a 3x2 matrix whose first row is `[3, 4]`)
+const matrix1 = numeri.fromNested([[3, 4], [5, 6], [7, 8]]); //(creates the same 3x2 matrix, but is a tiny bit slower than `fromFlat`)
 const tens4d0 = numeri.fromFlat([5, 7], [1, 2, 1, 1]) //(creates a 1x2x1x1 tensor)
 const zeroMat = numeri.zeros([4, 5]);
 const fourMat = numeri.fill([4, 5], 4);
@@ -13,7 +13,7 @@ const fourMat = numeri.fill([4, 5], 4);
 # Slicing and accessing
 
 ```
-matrix0.get([1, 2])
+matrix0.get([2, 1])
 
 matrix0.slice(0) //returns the 0th row vector
 matrix0.slice([0, 2]) //returns the submatrix with only the first two rows
@@ -46,6 +46,16 @@ matrix0.div(matrix1)
 matrix0.elemwiseBinaryOp(matrix1, (a, b) => Math.pow(a, b))
 
 matrix0.matMul(numeri.fromFlat([1, 2, 3, 4, 5, 6], [2, 3])) //matrix multiplication
+```
+
+# Broadcasting
+
+```
+matrix0.plus(1) //returns a matrix with 1 added to each element
+matrix0.plus(numeri.scalar(1).broadcastOn(0, 1)) //equivalent; explicitly broadcast scalar to both dimensions
+
+matrix0.plus(numeri.vector([1, 2]).broadcastOn(0)) //returns a matrix with [1, 2] added to each row
+matrix0.plus(numeri.vector([1, 2, 3]).broadcastOn(1)) //returns a matrix with [1, 2, 3] added to each column
 ```
 
 # A word about views
