@@ -165,6 +165,20 @@ describe('Tensor', () => {
     });
   });
 
+  describe('#lpNorm', () => {
+    it('gives the L^p norm', () => {
+      assert.strictEqual(createUtils.vector([3, -4]).lpNorm(1), 7);
+      assert.strictEqual(createUtils.vector([2, -2, 2, 1, -1, 1]).lpNorm(3), 3);
+    });
+  });
+
+  describe('#sum', () => {
+    it('sums', () => {
+      assert.strictEqual(createUtils.vector([3, 4]).sum(), 7);
+      assert.strictEqual(createUtils.fromFlat([-5, 1, 1, 1], [2, 2]).sum(), -2);
+    });
+  });
+
   describe('#broadcasting', () => {
     it('should work for binary and unary ops', () => {
       const col = createUtils.vector([0, 1]);

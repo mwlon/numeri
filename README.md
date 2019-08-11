@@ -14,6 +14,16 @@ const z123456 = numeri.range(7);
 const eyeMatr = numeri.identity(5); //5x5 identity matrix
 ```
 
+# Miscellaneous
+
+```
+matrix0.shape //returns [3, 2]
+
+matrix0.getLength() //total number of elements; 6
+
+matrix0.toNested() //returns as nested arrays
+```
+
 # Slicing and accessing
 
 ```
@@ -37,19 +47,33 @@ matrix0.reshape([2, 3]) //returns a new matrix [[3, 4, 5], [6, 7, 8]]
 ```
 Note that `.transpose` returns a view.
 
-# Simple operators
+# Setting
+
+```
+matrix0.set([1, 2], 3) //sets the [1, 2] entry to 3
+matrix0.setAll(11)
+matrix0.slice(1).setAll(12)
+```
+
+# Unary operators
 
 ```
 matrix0.exp() //returns a new matrix with elementwise exponentiation
 matrix0.map((x) => x * x)
+matrix0.mapInPlace((x) => x * 2)
+```
 
+# Binary operators
+```
 matrix0.plus(matrix1) //returns a new matrix by elementwise addition
 matrix0.minus(matrix1)
 matrix0.times(matrix1)
 matrix0.div(matrix1)
 matrix0.elemwiseBinaryOp(matrix1, (a, b) => Math.pow(a, b))
+matrix0.elemwiseBinaryOpInPlace(matrix1, (a, b) => Math.pow(a, b))
 
-matrix0.matMul(numeri.fromFlat([1, 2, 3, 4, 5, 6], [2, 3])) //matrix multiplication
+matrix0.matMul(numeri.fromFlat([1, 2, 3, 4, 5, 6], [2, 3])) //matrix multiplication; only works on 2-dimensional tensors
+vector0.dot(vector0) //vector dot product
 ```
 
 # Broadcasting
@@ -60,6 +84,13 @@ matrix0.plus(numeri.scalar(1).broadcastOn(0, 1)) //equivalent; explicitly broadc
 
 matrix0.plus(numeri.vector([1, 2]).broadcastOn(0)) //returns a matrix with [1, 2] added to each row
 matrix0.plus(numeri.vector([1, 2, 3]).broadcastOn(1)) //returns a matrix with [1, 2, 3] added to each column
+```
+
+# Reducing
+```
+matrix0.sum()
+matrix0.norm() //Eulidean norm
+matrix0.lpNorm(3) //L3 norm
 ```
 
 # A word about views
