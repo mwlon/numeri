@@ -55,10 +55,15 @@ describe('eig', () => {
         -1, 0, -4,
         0, -4, 2
       ], [3, 3]);
-      assertTensorEqual(hessenberg, expected);
+      assertTensorEqual(
+        hessenberg,
+        expected,
+        1E-12
+      );
       assertTensorEqual(
         matMul(matMul(q, hessenberg), q.transpose()),
-        unhelpfulMat
+        unhelpfulMat,
+        1E-12
       );
     });
   });
