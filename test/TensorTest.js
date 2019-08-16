@@ -130,25 +130,6 @@ describe('Tensor', () => {
     });
   });
 
-  describe('#matMul', () => {
-    it('should multiply matrices', () => {
-      const colVec = createUtils.fromFlat(
-        [0, 1, 2],
-        [3, 1]
-      );
-
-      const expected = createUtils.fromFlat(
-        [8, 17],
-        [2, 1]
-      );
-
-      assertTensorEqual(
-        notSimpleMat.matMul(colVec),
-        expected
-      );
-    });
-  });
-
   describe('#dot', () => {
     it('should take dot product of vectors', () => {
       const vec1 = createUtils.vector([1, 2, 3]);

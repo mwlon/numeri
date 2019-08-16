@@ -2,6 +2,7 @@ const assert = require('assert');
 const { assertTensorEqual } = require('./testUtils');
 const createUtils = require('../lib/createUtils');
 const eig = require('../lib/eig');
+const { matMul } = require('../lib/matrixUtils');
 
 describe('eig', () => {
   const n = 4;
@@ -17,12 +18,12 @@ describe('eig', () => {
     it('returns a tridiagonal matrix with or without getting Q matrix', () => {
       const { hessenberg, q } = eig.symHessenberg(symMat, {includeQ: true});
       assertTensorEqual(
-        q.matMul(hessenberg).matMul(q.transpose()),
+        matMul(matMul(q, hessenberg), q.transpose()),
         symMat,
         1E-12
       );
       assertTensorEqual(
-        q.matMul(q.transpose()),
+        matMul(q, q.transpose()),
         createUtils.identity(n),
         1E-12
       );
@@ -56,7 +57,7 @@ describe('eig', () => {
       ], [3, 3]);
       assertTensorEqual(hessenberg, expected);
       assertTensorEqual(
-        q.matMul(hessenberg).matMul(q.transpose()),
+        matMul(matMul(q, hessenberg), q.transpose()),
         unhelpfulMat
       );
     });
@@ -121,7 +122,7 @@ describe('eig', () => {
       mats.forEach((mat) => {
         const { vals, vecs } = eig.symEig(mat, {includeVecs: true});
         assertTensorEqual(
-          vecs.matMul(createUtils.diagonal(vals.data)).matMul(vecs.transpose()),
+          matMul(matMul(vecs, createUtils.diagonal(vals.data)), vecs.transpose()),
           mat,
           6E-4
         );
