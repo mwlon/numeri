@@ -129,12 +129,23 @@ describe('eig', () => {
         assertTensorEqual(
           matMul(matMul(vecs, createUtils.diagonal(vals.data)), vecs.transpose()),
           mat,
-          6E-4
+          1E-6
         );
       });
 
       const resultsWithoutVecs = eig.symEig(symMat, {includeVecs: false});
       assert(!resultsWithoutVecs.vecs);
+    });
+
+    it('works on a random, large-ish matrix', () => {
+      const randMat = createUtils.empty([10, 10]).mapInPlace(() => Math.random());
+      const randSymMat = randMat.plus(randMat.transpose());
+      const { vals, vecs } = eig.symEig(randSymMat, {includeVecs: true});
+      assertTensorEqual(
+        matMul(matMul(vecs, createUtils.diagonal(vals.data)), vecs.transpose()),
+        randSymMat,
+        1E-4
+      );
     });
   });
 });
