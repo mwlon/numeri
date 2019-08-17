@@ -49,7 +49,7 @@ describe('eig', () => {
         0, 2, 4,
         1, 4, 0
       ], [3, 3]);
-      const { hessenberg, q } = eig.symHessenberg(unhelpfulMat);
+      const { hessenberg, q } = eig.symHessenberg(unhelpfulMat, {includeQ: true});
       const expected = createUtils.fromFlat([
         0, -1, 0,
         -1, 0, -4,

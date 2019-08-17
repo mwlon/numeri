@@ -1,7 +1,6 @@
 API still unstable and liable to change.
 
 # Creating a tensor
-
 ```
 const scalar0 = numeri.scalar(3);
 const vector0 = numeri.vector([3, 4]);
@@ -15,17 +14,13 @@ const eyeMatr = numeri.identity(5); //5x5 identity matrix
 ```
 
 # Miscellaneous
-
 ```
 matrix0.shape //returns [3, 2]
-
 matrix0.getLength() //total number of elements; 6
-
 matrix0.toNested() //returns as nested arrays
 ```
 
 # Slicing and accessing
-
 ```
 matrix0.get(2, 1)
 
@@ -37,7 +32,6 @@ matrix0.slice(undefined, [0, 4, 2]) //returns the submatrix with every even colu
 Note that `.slice` returns a view.
 
 # Reshaping
-
 ```
 matrix0.transpose([1, 0]) //if matrix0 is n x m, this returns an m x n matrix
 matrix0.transpose() //shorthand, only possible if the tensor is a matrix
@@ -48,7 +42,6 @@ matrix0.reshape([2, 3]) //returns a new matrix [[3, 4, 5], [6, 7, 8]]
 Note that `.transpose` returns a view.
 
 # Setting
-
 ```
 matrix0.set([1, 2], 3) //sets the [1, 2] entry to 3
 matrix0.setAll(11)
@@ -56,7 +49,6 @@ matrix0.slice(1).setAll(12)
 ```
 
 # Unary operators
-
 ```
 matrix0.exp() //returns a new matrix with elementwise exponentiation
 matrix0.map((x) => x * x)
@@ -77,7 +69,6 @@ vector0.dot(vector0) //vector dot product
 ```
 
 # Broadcasting
-
 ```
 matrix0.plus(1) //returns a matrix with 1 added to each element
 matrix0.plus(numeri.scalar(1).broadcastOn(0, 1)) //equivalent; explicitly broadcast scalar to both dimensions
@@ -91,6 +82,17 @@ matrix0.plus(numeri.vector([1, 2, 3]).broadcastOn(1)) //returns a matrix with [1
 matrix0.sum()
 matrix0.norm() //Eulidean norm
 matrix0.lpNorm(3) //L3 norm
+```
+
+# Eigen / Eigenvalue / Eigenvector / Hessenberg Operations
+```
+const symMat = numeri.fromFlat([1, 2, 3, 2, 4, 5, 3, 5, 6], [3, 3]);
+const tridiagonalMat = numeri.fromFlat([1, 2, 0, 2, 4, 5, 0, 5, 6], [3, 3]);
+
+const { vals } = numeri.symEig(symMat); //returns vals as tensor
+const { vals, vecs } = numeri.symEig(symMat, {includeVecs: true}); //and vecs as columns
+const { vals, vecs } = numeri.tridiagonalEig(tridiagonalMat, {includeVecs: true});
+const { hessenberg, q } = numeri.symHessenberg(symMat, {includeQ: true}); //hessenberg of symmetric matrix is tridiagonal
 ```
 
 # A word about views
