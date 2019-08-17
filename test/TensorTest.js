@@ -130,15 +130,6 @@ describe('Tensor', () => {
     });
   });
 
-  describe('#dot', () => {
-    it('should take dot product of vectors', () => {
-      const vec1 = createUtils.vector([1, 2, 3]);
-      const vec2 = createUtils.vector([2, 3, 4]);
-
-      assert.strictEqual(vec1.dot(vec2), 20);
-    });
-  });
-
   describe('#norm', () => {
     it('gives the Euclidean norm', () => {
       assert.strictEqual(createUtils.vector([3, 4]).norm(), 5);

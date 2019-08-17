@@ -1,7 +1,8 @@
+const assert = require('assert');
 const { assertTensorEqual } = require('./testUtils');
 const Tensor = require('../lib/Tensor');
 const createUtils = require('../lib/createUtils');
-const { matMul } = require('../lib/matrixUtils');
+const { matMul, dot } = require('../lib/matrixUtils');
 
 describe('matrixUtils', () => {
   const notSimpleMat = new Tensor({
@@ -28,6 +29,15 @@ describe('matrixUtils', () => {
         matMul(notSimpleMat, colVec),
         expected
       );
+    });
+  });
+
+  describe('#dot', () => {
+    it('should take dot product of vectors', () => {
+      const vec1 = createUtils.vector([1, 2, 3]);
+      const vec2 = createUtils.vector([2, 3, 4]);
+
+      assert.strictEqual(dot(vec1, vec2), 20);
     });
   });
 });
