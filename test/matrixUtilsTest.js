@@ -2,7 +2,7 @@ const assert = require('assert');
 const { assertTensorEqual } = require('./testUtils');
 const Tensor = require('../lib/Tensor');
 const createUtils = require('../lib/createUtils');
-const { matMul, dot } = require('../lib/matrixUtils');
+const { matMul, vecMulMat, matMulVec, dot, outerProd } = require('../lib/matrixUtils');
 
 describe('matrixUtils', () => {
   const notSimpleMat = new Tensor({
@@ -12,6 +12,8 @@ describe('matrixUtils', () => {
     mods: [2, 6],
     offset: 1
   });
+  //1 2 3
+  //4 5 6
 
   describe('#matMul', () => {
     it('should multiply matrices', () => {
@@ -30,6 +32,37 @@ describe('matrixUtils', () => {
         expected
       );
     });
+
+    it('should infer vectors as row/col', () => {
+      const colVec = createUtils.vector([0, 1, 2]);
+      assertTensorEqual(
+        matMul(notSimpleMat, colVec),
+        createUtils.vector([8, 17])
+      );
+      assertTensorEqual(
+        matMulVec(notSimpleMat, colVec),
+        createUtils.vector([8, 17])
+      );
+
+      const rowVec = createUtils.vector([3, 4]);
+      assertTensorEqual(
+        matMul(rowVec, notSimpleMat),
+        createUtils.vector([19, 26, 33])
+      );
+      assertTensorEqual(
+        vecMulMat(rowVec, notSimpleMat),
+        createUtils.vector([19, 26, 33])
+      );
+    });
+  });
+
+  describe('#outerProd', () => {
+    it('should do combinations of multiplication', () => {
+      assertTensorEqual(
+        outerProd(createUtils.vector([0, 1, 2]), createUtils.vector([3, 4])),
+        createUtils.fromFlat([0, 0, 3, 4, 6, 8], [3, 2])
+      );
+    })
   });
 
   describe('#dot', () => {

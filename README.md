@@ -13,15 +13,15 @@ It aims to
 
 # Creating a Tensor
 ```
-const scalar0 = numeri.scalar(3);
-const vector0 = numeri.vector([3, 4]);
-const matrix0 = numeri.fromFlat([3, 4, 5, 6, 7, 8], [3, 2]); //a 3x2 matrix whose first row is `[3, 4]`
-const matrix1 = numeri.fromNested([[3, 4], [5, 6], [7, 8]]); //the same 3x2 matrix, but is a tiny bit slower than `fromFlat`
+const scalar0 = numeri.scalar(3)
+const vector0 = numeri.vector([3, 4])
+const matrix0 = numeri.fromFlat([3, 4, 5, 6, 7, 8], [3, 2]) //a 3x2 matrix whose first row is `[3, 4]`
+const matrix1 = numeri.fromNested([[3, 4], [5, 6], [7, 8]]) //the same 3x2 matrix, but is a tiny bit slower than `fromFlat`
 const tens4d0 = numeri.fromFlat([5, 7], [1, 2, 1, 1]) //a 1x2x1x1 tensor
-const zeroMat = numeri.zeros([4, 5]);
-const fourMat = numeri.fill([4, 5], 4);
-const z123456 = numeri.range(7);
-const eyeMatr = numeri.identity(5); //5x5 identity matrix
+const zeroMat = numeri.zeros([4, 5])
+const fourMat = numeri.fill([4, 5], 4)
+const z123456 = numeri.range(7)
+const eyeMatr = numeri.identity(5) //5x5 identity matrix
 ```
 
 # Miscellaneous
@@ -78,7 +78,7 @@ matrix0.elemwiseBinaryOpInPlace(matrix1, (a, b) => Math.pow(a, b))
 
 # Matrix Operators
 ```
-const { matMul, outerProd, dot } = numeri;
+const { matMul, outerProd, dot } = numeri
 matMul(matrix0, numeri.fromFlat([1, 2, 3, 4, 5, 6], [2, 3])) //matrix multiplication; only works on 2-dimensional tensors
 matMul(matrix0, vector0) //infer vector0 to be treated as a column vector
 dot(vector0, vector0) //vector dot product
@@ -103,14 +103,14 @@ matrix0.lpNorm(3) //L3 norm
 
 # Eigen / Eigenvalue / Eigenvector / Hessenberg Operations
 ```
-const { symEig, tridiagonalEig, symHessenberg } = numeri;
-const symMat = numeri.fromFlat([1, 2, 3, 2, 4, 5, 3, 5, 6], [3, 3]);
-const tridiagonalMat = numeri.fromFlat([1, 2, 0, 2, 4, 5, 0, 5, 6], [3, 3]);
+const { symEig, tridiagonalEig, symHessenberg } = numeri
+const symMat = numeri.fromFlat([1, 2, 3, 2, 4, 5, 3, 5, 6], [3, 3])
+const tridiagonalMat = numeri.fromFlat([1, 2, 0, 2, 4, 5, 0, 5, 6], [3, 3])
 
-symEig(symMat); //returns {vals} as tensor
-symEig(symMat, {includeVecs: true}); //return {vals, vecs} with vecs a tensor whose columns are the eigenvectors
-tridiagonalEig(tridiagonalMat, {includeVecs: true});
-symHessenberg(symMat, {includeQ: true}); //returns {hessenberg, q}; Hessenberg of symmetric matrix is tridiagonal
+symEig(symMat) //returns {vals} as tensor
+symEig(symMat, {includeVecs: true}) //return {vals, vecs} with vecs a tensor whose columns are the eigenvectors
+tridiagonalEig(tridiagonalMat, {includeVecs: true})
+symHessenberg(symMat, {includeQ: true}) //returns {hessenberg, q} Hessenberg of symmetric matrix is tridiagonal
 ```
 
 # A Word about Views
