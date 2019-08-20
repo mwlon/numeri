@@ -62,7 +62,7 @@ describe('matrixUtils', () => {
         outerProd(createUtils.vector([0, 1, 2]), createUtils.vector([3, 4])),
         createUtils.fromFlat([0, 0, 3, 4, 6, 8], [3, 2])
       );
-    })
+    });
   });
 
   describe('#dot', () => {

@@ -16,7 +16,7 @@ module.exports = {
   },
 
   dataWithinTolerance(data0, data1, tolerance) {
-    for (var j = 0; j < data0.length; j++) {
+    for (let j = 0; j < data0.length; j++) {
       const diff = Math.abs(data0[j] - data1[j]);
       if (diff > tolerance || isNaN(diff) || diff === undefined) {
         return false;

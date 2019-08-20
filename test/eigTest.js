@@ -27,8 +27,8 @@ describe('eig', () => {
         createUtils.identity(n),
         1E-12
       );
-      for (var i = 0; i < n; i++) {
-        for (var j = 0; j < n; j++) {
+      for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
           if (Math.abs(i - j) > 1) {
             //should be 0's off the tridiagonal
             assert.strictEqual(hessenberg.get(i, j), 0);
