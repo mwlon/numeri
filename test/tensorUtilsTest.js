@@ -13,4 +13,14 @@ describe('tensorUtils', () => {
       );
     });
   });
+
+  describe('#shapesEqual', () => {
+    it('should return true if equal and false otherwise', () => {
+      assert(!tensorUtils.shapesEqual([1, 2, 3], [1, 2]));
+      assert(!tensorUtils.shapesEqual([1, 2], [1, 2, 3]));
+      assert(!tensorUtils.shapesEqual([1, 2, 3], [1, 2, 4]));
+      assert(!tensorUtils.shapesEqual([1, 2, 3], [1, 2, undefined]));
+      assert(tensorUtils.shapesEqual([1, 2, 3], [1, 2, 3]));
+    });
+  });
 });
