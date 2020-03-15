@@ -130,6 +130,39 @@ describe('Tensor', () => {
     });
   });
 
+  describe('#argmax and #argmin', () => {
+    const fullVec = createUtils.vector([-2, -1, -3]);
+
+    it('reduces an empty vector', () => {
+      const vec = createUtils.vector([]);
+      assert.strictEqual(vec.argmax(), -1);
+    });
+
+    it('reduces a vector', () => {
+      assert.strictEqual(fullVec.argmax(), 1);
+      assert.strictEqual(fullVec.argmin(), 2);
+    });
+
+    it('can return a scalar tensor', () => {
+      assertTensorEqual(
+        fullVec.argmax({keepScalarAsTensor: true}),
+        createUtils.scalar(1)
+      );
+    });
+
+    it('works on high-dimensional tensors and throws errors', () => {
+      const mat = createUtils.fromFlat([0, 2, 3, 5, 4, 1], [2, 3]);
+      assertTensorEqual(
+        mat.argmin({axis: 0}),
+        createUtils.vector([0, 0, 1])
+      );
+      assertTensorEqual(
+        mat.argmin({axis: 1}),
+        createUtils.vector([0, 2])
+      );
+    });
+  });
+
   describe('#norm', () => {
     it('gives the Euclidean norm', () => {
       assert.strictEqual(createUtils.vector([3, 4]).norm(), 5);
@@ -147,6 +180,7 @@ describe('Tensor', () => {
   describe('#sum', () => {
     it('sums', () => {
       assert.strictEqual(createUtils.vector([3, 4]).sum(), 7);
+      assert.strictEqual(createUtils.vector([]).sum(), 0);
       assert.strictEqual(createUtils.fromFlat([-5, 1, 1, 1], [2, 2]).sum(), -2);
     });
 
@@ -157,7 +191,7 @@ describe('Tensor', () => {
       );
     });
 
-    it('reduce on a subset of axes', () => {
+    it('reduces on a subset of axes and catches invalid axes', () => {
       const matrix = createUtils.fromFlat([0, 1, 2, 3, 4, 5], [2, 3]);
 
       assertTensorEqual(
@@ -168,6 +202,15 @@ describe('Tensor', () => {
       assertTensorEqual(
         matrix.sum({axes: [1]}),
         createUtils.vector([3, 12])
+      );
+
+      assert.throws(
+        () => matrix.sum({axes: [0.5]}),
+        /Invalid axes/
+      );
+      assert.throws(
+        () => matrix.sum({axes: [2]}),
+        /Invalid axes/
       );
     });
   });

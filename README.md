@@ -94,7 +94,15 @@ matrix0.plus(numeri.vector([1, 2]).broadcastOn(0)) //returns a matrix with [1, 2
 matrix0.plus(numeri.vector([1, 2, 3]).broadcastOn(1)) //returns a matrix with [1, 2, 3] added to each column
 ```
 
-# Reducing
+# Reducing (single axis only)
+```
+vector0.argmin() //returns a number
+matrix0.argmax({axis: 1}) //returns a vector with as many entries as matrix0 has rows
+vector0.argmin({keepScalarAsTensor: true}) //returns a scalar Tensor
+```
+
+
+# Reducing (possibly multiple axes)
 ```
 matrix0.sum() //returns a number
 matrix0.sum({axes: [1]}) //returns a vector with as many entries as matrix0 has rows
