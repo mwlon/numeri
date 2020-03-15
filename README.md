@@ -96,7 +96,10 @@ matrix0.plus(numeri.vector([1, 2, 3]).broadcastOn(1)) //returns a matrix with [1
 
 # Reducing
 ```
-matrix0.sum()
+matrix0.sum() //returns a number
+matrix0.sum({axes: [1]}) //returns a vector with as many entries as matrix0 has rows
+matrix0.sum({keepScalarAsTensor: true}) //returns a scalar Tensor
+//these same options can be applied to any tensor
 matrix0.norm() //Eulidean norm
 matrix0.lpNorm(3) //L3 norm
 ```

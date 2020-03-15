@@ -149,6 +149,27 @@ describe('Tensor', () => {
       assert.strictEqual(createUtils.vector([3, 4]).sum(), 7);
       assert.strictEqual(createUtils.fromFlat([-5, 1, 1, 1], [2, 2]).sum(), -2);
     });
+
+    it('can return a scalar tensor', () => {
+      assertTensorEqual(
+        createUtils.vector([3, 4]).sum({keepScalarAsTensor: true}),
+        createUtils.scalar(7)
+      );
+    });
+
+    it('reduce on a subset of axes', () => {
+      const matrix = createUtils.fromFlat([0, 1, 2, 3, 4, 5], [2, 3]);
+
+      assertTensorEqual(
+        matrix.sum({axes: [0]}),
+        createUtils.vector([3, 5, 7])
+      );
+
+      assertTensorEqual(
+        matrix.sum({axes: [1]}),
+        createUtils.vector([3, 12])
+      );
+    });
   });
 
   describe('#broadcasting', () => {
