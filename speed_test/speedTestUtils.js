@@ -17,8 +17,8 @@ module.exports = {
     console.log(`${name} step ${color}[${new Date() - t} vs ${expected} ms]\x1b[0m`);
     return res;
   },
-  
+
   time: (op, name, expected) => {
     module.exports.timeAndReturn(op, name, expected);
   },
-}
+};

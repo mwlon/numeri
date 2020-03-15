@@ -35,7 +35,7 @@
   "homepage": "https://github.com/mwlon/numeri",
   "scripts": {
     "test": "mocha $(find test -name \"*$f*.js\") --timeout 200",
-    "lint": "./node_modules/.bin/eslint {lib/**,test/**}",
+    "lint": "./node_modules/.bin/eslint {lib/**,test/**,speed_test/**}",
     "speed": "find speed_test/tests -type f | xargs -I{} node {}"
   }
 }

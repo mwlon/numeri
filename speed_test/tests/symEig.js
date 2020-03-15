@@ -1,5 +1,5 @@
 const numeri = require('../../lib/index.js');
-const { time, timeAndReturn } = require('../speedTestUtils');
+const { time } = require('../speedTestUtils');
 
 const n = 100;
 const randMat = numeri.empty([n, n]).mapInPlace(() => Math.random());
