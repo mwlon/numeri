@@ -14,7 +14,9 @@ module.exports = {
       color = '\x1b[31m'; //red
     }
 
-    console.log(`${name} step ${color}[${new Date() - t} vs ${expected} ms]\x1b[0m`);
+    console.log( //eslint-disable-line no-console
+      `${name} step ${color}[${new Date() - t} vs ${expected} ms]\x1b[0m`
+    );
     return res;
   },
 
