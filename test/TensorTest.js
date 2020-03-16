@@ -215,6 +215,15 @@ describe('Tensor', () => {
     });
   });
 
+  describe('#min and #max', () => {
+    const vec = createUtils.vector([8, 7, 9]);
+
+    it('gives does the right reduction', () => {
+      assert.strictEqual(vec.min(), 7);
+      assert.strictEqual(vec.max(), 9);
+    });
+  });
+
   describe('#broadcasting', () => {
     it('should work for binary and unary ops', () => {
       const col = createUtils.vector([0, 1]);
