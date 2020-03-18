@@ -161,6 +161,26 @@ describe('Tensor', () => {
         createUtils.vector([0, 2])
       );
     });
+
+    it('can include values too', () => {
+      const mat = createUtils.fromFlat([0, 2, 3, 5, 4, 1], [2, 3]);
+      const { arg, values } = mat.argmin({axis: 0, includeValues: true});
+      assertTensorEqual(
+        arg,
+        createUtils.vector([0, 0, 1])
+      );
+      assertTensorEqual(
+        values,
+        createUtils.vector([0, 2, 1])
+      );
+
+      const vec = createUtils.vector([8, 7, 9]);
+      const { arg: singleArg, values: singleValue } = vec.argmin({
+        includeValues: true
+      });
+      assert.strictEqual(singleArg, 1);
+      assert.strictEqual(singleValue, 7);
+    });
   });
 
   describe('#norm', () => {
