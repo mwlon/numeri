@@ -24,15 +24,13 @@ time(() => {
 
 time(() => {
   for (let i = 0; i < n; i++) {
-    (() => {
-      return new numeri.Tensor({
-        data,
-        shape: [4, 4],
-        offset: 1,
-        strides: [2, 8],
-        mods: [8, 100]
-      });
-    })();
+    new numeri.Tensor({ //eslint-disable-line no-new
+      data,
+      shape: [4, 4],
+      offset: 1,
+      strides: [2, 8],
+      mods: [8, 100]
+    });
   }
 }, 'complicated_constructor_dim_2', 240);
 
