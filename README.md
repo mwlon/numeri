@@ -1,4 +1,5 @@
 API still unstable and liable to change.
+More info: https://graphallthethings.com/posts/numeri/
 
 # Principles
 
