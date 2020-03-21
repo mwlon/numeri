@@ -111,6 +111,19 @@ describe('Tensor', () => {
     });
   });
 
+  describe('#elemwiseBinaryOpInPlace', () => {
+    it('modifies the original tensor', () => {
+      const mat = createUtils.fromFlat([1, 2, 3, 4], [2, 2]);
+      const vec = createUtils.vector([5, 6]);
+
+      mat.elemwiseBinaryOpInPlace(vec.broadcastOn(1), (x, y) => x * y);
+      assertTensorEqual(
+        mat,
+        createUtils.fromFlat([5, 10, 18, 24], [2, 2])
+      );
+    });
+  });
+
   describe('#minus', () => {
     it('should subtract numbers', () => {
       assertTensorEqual(
@@ -246,7 +259,7 @@ describe('Tensor', () => {
   describe('#min and #max', () => {
     const vec = createUtils.vector([8, 7, 9]);
 
-    it('gives does the right reduction', () => {
+    it('gives the right reduction', () => {
       assert.strictEqual(vec.min(), 7);
       assert.strictEqual(vec.max(), 9);
     });
