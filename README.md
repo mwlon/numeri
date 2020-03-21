@@ -56,6 +56,7 @@ Note that `.transpose` returns a view.
 # Setting
 ```
 matrix0.set([1, 2], 3) //sets the [1, 2] entry to 3
+matrix0.update([1, 2], (x) => x + 3) //increments the [1, 2] entry by 3
 matrix0.setAll(11)
 matrix0.slice(1).setAll(12)
 ```

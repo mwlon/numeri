@@ -16,6 +16,14 @@ describe('Tensor', () => {
     offset: 1
   });
 
+  describe('#update', () => {
+    it('should change values', () => {
+      const vec = createUtils.vector([3, 4]);
+      vec.update([1], (x) => x + 7);
+      assertTensorEqual(vec, createUtils.vector([3, 11]));
+    })
+  });
+
   describe('#slice', () => {
     it('should support subsets and undefined (keep all)', () => {
       assertTensorEqual(
