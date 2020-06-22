@@ -21,7 +21,7 @@ describe('Tensor', () => {
       const vec = createUtils.vector([3, 4]);
       vec.update([1], (x) => x + 7);
       assertTensorEqual(vec, createUtils.vector([3, 11]));
-    })
+    });
   });
 
   describe('#slice', () => {
@@ -205,9 +205,9 @@ describe('Tensor', () => {
 
     it('works even under weird circumstances', () => {
       const tensor = createUtils.fromFlat(
-          [0, 1, 2, 3, 4, 109, 108, 107, 5, 104, 105, 106, 6, 7, 8, 9],
-          [4, 4]
-        )
+        [0, 1, 2, 3, 4, 109, 108, 107, 5, 104, 105, 106, 6, 7, 8, 9],
+        [4, 4]
+      )
         .slice([1, 3], [1, 4])
         .broadcastOn(0);
 
