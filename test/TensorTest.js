@@ -202,6 +202,20 @@ describe('Tensor', () => {
       assert.strictEqual(singleArg, 1);
       assert.strictEqual(singleValue, 7);
     });
+
+    it('works even under weird circumstances', () => {
+      const tensor = createUtils.fromFlat(
+          [0, 1, 2, 3, 4, 109, 108, 107, 5, 104, 105, 106, 6, 7, 8, 9],
+          [4, 4]
+        )
+        .slice([1, 3], [1, 4])
+        .broadcastOn(0);
+
+      assertTensorEqual(
+        tensor.argmin({axis: 2}),
+        createUtils.fromFlat([2, 0], [undefined, 2])
+      );
+    });
   });
 
   describe('#norm', () => {
@@ -252,6 +266,22 @@ describe('Tensor', () => {
       assert.throws(
         () => matrix.sum({axes: [2]}),
         /Invalid axes/
+      );
+    });
+
+    it('works even under weird circumstances', () => {
+      const tensor = createUtils.range(16)
+        .reshape([4, 4])
+        .slice([1, 3], [1, 3])
+        .broadcastOn(0, 1, 4);
+      assert.deepEqual(tensor.shape, [undefined, undefined, 2, 2, undefined]);
+      assertTensorEqual(
+        tensor.copy(),
+        createUtils.fromFlat([5, 6, 9, 10], [undefined, undefined, 2, 2, undefined])
+      );
+      assertTensorEqual(
+        tensor.sum({axes: [1, 3]}),
+        createUtils.fromFlat([11, 19], [undefined, 2, undefined])
       );
     });
   });
