@@ -19,8 +19,8 @@
   "readmeFilename": "README.md",
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "mocha": "^7.1.0"
+    "eslint": "^7.6.0",
+    "mocha": "^8.1.1"
   },
   "optionalDependencies": {},
   "engines": {
