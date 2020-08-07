@@ -65,6 +65,40 @@ describe('Tensor', () => {
     });
   });
 
+  describe('#tile', () => {
+    it('should add new dims', () => {
+      const t = createUtils.fromFlat([1, 2], [1, 2]);
+      assertTensorEqual(
+        t.tile([[0, 1], [2, 3]], {addDims: true}),
+        createUtils.fromFlat([1, 2, 1, 2, 1, 2], [1, 1, 3, 2])
+      );
+      assertTensorEqual(
+        t.tile([[2, 3]], {addDims: true}),
+        createUtils.fromFlat([1, 1, 1, 2, 2, 2], [1, 2, 3])
+      );
+    });
+
+    it('can even tile a broadcasted tensor', () => {
+      const t = createUtils.fromFlat([1, 2], [1, undefined, 2]);
+      assertTensorEqual(
+        t.tile([[1, 2]], {addDims: true}),
+        createUtils.fromFlat([1, 2, 1, 2], [1, 2, undefined, 2])
+      );
+    });
+
+    it('should increase existing dims', () => {
+      const t = createUtils.fromFlat([1, 2, 3, 4], [2, 2]);
+      assertTensorEqual(
+        t.tile([[1, 2], [0, 1]]),
+        createUtils.fromFlat([1, 2, 1, 2, 3, 4, 3, 4], [2, 4])
+      );
+      assertTensorEqual(
+        t.tile([[0, 2], [1, 1]]),
+        createUtils.fromFlat([1, 2, 3, 4, 1, 2, 3, 4], [4, 2])
+      );
+    });
+  });
+
   describe('#copy', () => {
     it('should return a new version of the data', () => {
       const copied = notSimpleMat.copy();
