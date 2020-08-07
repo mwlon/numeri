@@ -50,6 +50,9 @@ matrix0.transpose() //shorthand, only possible if the tensor is a matrix
 tens4d0.transpose([0, 2, 3, 1]) //(a x b x c x d) -> (a x c x d x b)
 
 matrix0.reshape([2, 3]) //returns a new matrix [[3, 4, 5], [6, 7, 8]]
+
+matrix0.tile([[0, 3]]) //returns a tiled matrix 3x as big in the 0 axis
+matrix0.tile([[0, 3]], {addDims: true}) //returns a 3 x m x n tiled tensor
 ```
 Note that `.transpose` returns a view.
 
