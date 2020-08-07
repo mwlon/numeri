@@ -1,6 +1,6 @@
 {
   "name": "numeri",
-  "version": "0.4.6",
+  "version": "0.5.0",
   "description": "Numerical methods for web",
   "main": "./lib/index.js",
   "repository": {
