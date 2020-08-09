@@ -56,6 +56,12 @@ matrix0.tile([[0, 3]], {addDims: true}) //returns a 3 x m x n tiled tensor
 ```
 Note that `.transpose` returns a view.
 
+# Combining
+```
+numeri.stack([matrix0, matrix1], 1) //returns a 3D tensor by stacking these along the 1 axis
+numeri.concat([matrix0, matrix1], 1) //return a 2D tensor by concatenating these along the 1 axis
+```
+
 # Setting
 ```
 matrix0.set([1, 2], 3) //sets the [1, 2] entry to 3
@@ -98,6 +104,7 @@ matrix0.plus(numeri.scalar(1).broadcastOn(0, 1)) //equivalent; explicitly broadc
 matrix0.plus(numeri.vector([1, 2]).broadcastOn(0)) //returns a matrix with [1, 2] added to each row
 matrix0.plus(numeri.vector([1, 2, 3]).broadcastOn(1)) //returns a matrix with [1, 2, 3] added to each column
 ```
+Note that broadcasted tensors also work in many other operations such as `stack`.
 
 # Reducing (single axis only)
 ```
