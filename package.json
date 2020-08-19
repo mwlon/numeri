@@ -20,7 +20,10 @@
   "dependencies": {},
   "devDependencies": {
     "eslint": "^7.6.0",
-    "mocha": "^8.1.1"
+    "express": "^4.17.1",
+    "mocha": "^8.1.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   },
   "optionalDependencies": {},
   "engines": {
@@ -36,6 +39,7 @@
   "scripts": {
     "test": "mocha $(find test -name \"*$f*.js\") --timeout 200",
     "lint": "./node_modules/.bin/eslint {lib/**,test/**,speed_test/**}",
-    "speed": "find speed_test/tests -type f | xargs -I{} node {}"
+    "speed": "find speed_test/tests -type f | COLOR=1 xargs -I{} node {}",
+    "speed-web": "bash speed_test/launch_web_server.sh \"$f\""
   }
 }

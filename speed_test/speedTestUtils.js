@@ -1,3 +1,5 @@
+const { env } = process;
+
 module.exports = {
   timeAndReturn: (op, name, expected) => {
     const t = new Date();
@@ -14,9 +16,15 @@ module.exports = {
       color = '\x1b[31m'; //red
     }
 
-    console.log( //eslint-disable-line no-console
-      `${name} step ${color}[${new Date() - t} vs ${expected} ms]\x1b[0m`
-    );
+    if (env.COLOR) {
+      console.log( //eslint-disable-line no-console
+        `${name} step ${color}[${new Date() - t} vs ${expected} ms]\x1b[0m`
+      );
+    } else {
+      console.log( //eslint-disable-line no-console
+        `${name} step [${new Date() - t} vs ${expected} ms]`
+      );
+    }
     return res;
   },
 
