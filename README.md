@@ -111,7 +111,7 @@ Note that broadcasted tensors also work in many other operations such as `stack`
 vector0.argmin() //returns a number
 matrix0.argmax({axis: 1}) //returns a vector with as many entries as matrix0 has rows
 vector0.argmin({keepScalarAsTensor: true}) //returns a scalar Tensor
-const { arg, values } = vector0.argmin() //get both the argmin and min
+const { arg, values } = vector0.argmin({includeValues: true}) //get both the argmin and min
 ```
 
 
