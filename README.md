@@ -1,12 +1,10 @@
-More info: https://graphallthethings.com/posts/numeri/
-
 # Principles
 
-Numeri is created to be an all-purpose yet lightweight numerical and tensor library.
+Numeri is a many-purpose yet lightweight numerical and tensor library.
 It aims to
 * provide powerful, high-level operations like eigenvalue and eigenvector decompositions
 * be entirely Javascript to support in-browser use
-* provide a Javascript-y API
+* provide an API that fits in with other JavaScript projects
 * achieve nearly the fastest runtime possible for native Javascript code
 * support operations on arbitrarily-shaped tensors
 * require 0 (non-dev) dependencies to ensure a very small package size
@@ -147,3 +145,7 @@ It also saves memory by not copying the data into each tensor.
 However, sometimes having data laid out in order makes operations faster.
 For instance, if we define `a = parentTensor.slice(...sliceArgs).transpose(permutation)` and then do many evaluations of `a.plus(tensor0)`, `a.plus(tensor1)`, ..., it could save time do a copy with `a = parentTensor.slice(...sliceArgs).transpose(permutation).copy()`.
 This will make each of the following `.plus` operations faster.
+
+# More Info
+
+[blog post](https://graphallthethings.com/posts/numeri/)
